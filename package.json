@@ -7,6 +7,11 @@
         "homepage": "https://dah-kenangnon.com"
     },
     "description": "Cursor rules for rapid development",
+    "main": "index.js",
+    "scripts": {
+        "pull": "node ./bin/rules-pull.js",
+        "push": "node ./bin/rules-push.js"
+    },
     "dependencies": {
         "@octokit/rest": "^21.1.1",
         "commander": "^14.0.0",
@@ -18,8 +23,8 @@
         "semver": "^7.5.4"
     },
     "bin": {
-        "pull": "./bin/rules-pull.js",
-        "push": "./bin/rules-push.js"
+        "cursor-rules-pull": "./bin/rules-pull.js",
+        "cursor-rules-push": "./bin/rules-push.js"
     },
     "keywords": [
         "cursor",

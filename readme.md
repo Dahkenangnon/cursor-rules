@@ -14,20 +14,23 @@ The `always-follow.mdc` file contains project guidelines including:
 - Form handling patterns
 - Mongoose models structure
 
-## Installation
+## Installation & Usage
 
-You can use this package directly from GitHub without installing it:
+You can use this package directly from GitHub:
 
 ```bash
-# Run directly using npx with GitHub repository
-npx github:Dahkenangnon/cursor-rules pull
-npx github:Dahkenangnon/cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch my-update
+# Install and run directly (recommended)
+npx cursor-rules pull
+npx cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch my-update
 
 # Or clone the repository for local development
 git clone https://github.com/Dahkenangnon/cursor-rules.git
 cd cursor-rules
 npm install
-npm link # For local development
+
+# Then run locally
+npm run pull
+npm run push -- --token YOUR_GITHUB_TOKEN --new-branch my-update
 ```
 
 ## Synchronization Scripts
@@ -39,14 +42,14 @@ This repository includes two scripts to help you synchronize rules between your 
 Pulls the latest rules from the GitHub repository and merges them with your local rules.
 
 ```bash
-# Run directly from GitHub (no token needed for public repos)
-npx github:Dahkenangnon/cursor-rules pull
+# Run directly
+npx cursor-rules pull
 
 # Or if using a private repository
-npx github:Dahkenangnon/cursor-rules pull --token YOUR_GITHUB_TOKEN --private
+npx cursor-rules pull --token YOUR_GITHUB_TOKEN --private
 
-# If locally cloned and linked
-pull
+# If locally installed
+npm run pull
 ```
 
 #### Options:
@@ -70,11 +73,11 @@ pull
 Pushes your local rules to the GitHub repository as a pull request. **Requires GitHub token.**
 
 ```bash
-# Run directly from GitHub (token is required)
-npx github:Dahkenangnon/cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch update-rules-20240607
+# Run directly (token is required)
+npx cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch update-rules-20240607
 
-# Or if locally cloned and linked
-push --token YOUR_GITHUB_TOKEN --new-branch update-rules-20240607
+# If locally installed
+npm run push -- --token YOUR_GITHUB_TOKEN --new-branch update-rules-20240607
 ```
 
 #### Options:
@@ -107,46 +110,46 @@ When pulling rules, you can choose between different merge strategies:
 
 ```bash
 # Basic usage (for public repositories)
-npx github:Dahkenangnon/cursor-rules pull
+npx cursor-rules pull
 
 # For private repositories, use a token
 export GITHUB_TOKEN=your_token_here
-npx github:Dahkenangnon/cursor-rules pull --private
+npx cursor-rules pull --private
 
 # Or specify token directly
-npx github:Dahkenangnon/cursor-rules pull --token your_token_here --private
+npx cursor-rules pull --token your_token_here --private
 ```
 
 ### Using different merge strategies
 
 ```bash
 # Use simple merge strategy (concatenation)
-npx github:Dahkenangnon/cursor-rules pull --merge-strategy simple
+npx cursor-rules pull --merge-strategy simple
 
 # Use smart merge strategy (default)
-npx github:Dahkenangnon/cursor-rules pull --merge-strategy smart
+npx cursor-rules pull --merge-strategy smart
 
 # Use manual merge with interactive prompts
-npx github:Dahkenangnon/cursor-rules pull --merge-strategy manual
+npx cursor-rules pull --merge-strategy manual
 ```
 
 ### Customizing the pull location
 
 ```bash
-npx github:Dahkenangnon/cursor-rules pull --path rules/nextjs/standard/always-follow.mdc --dest .cursor/nextjs-rules.mdc
+npx cursor-rules pull --path rules/nextjs/standard/always-follow.mdc --dest .cursor/nextjs-rules.mdc
 ```
 
 ### Creating a pull request with your changes
 
 ```bash
 # Create a PR with changes (token is required)
-npx github:Dahkenangnon/cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch update-june-2024 --message "Add new form handling patterns"
+npx cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch update-june-2024 --message "Add new form handling patterns"
 
 # Just push to a branch without creating a PR
-npx github:Dahkenangnon/cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch my-updates --no-pr
+npx cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch my-updates --no-pr
 
 # Verbose mode for debugging
-npx github:Dahkenangnon/cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch my-updates --verbose
+npx cursor-rules push --token YOUR_GITHUB_TOKEN --new-branch my-updates --verbose
 ```
 
 ## Rules Directory Structure
@@ -159,6 +162,23 @@ rules/
 │   └── advanced/         # Advanced patterns
 ├── nextjs/              # Next.js specific rules
 └── express/             # Express.js specific rules
+```
+
+## Troubleshooting
+
+### Error: could not determine executable to run
+
+If you encounter this error when running with npx, try one of these alternatives:
+
+```bash
+# Alternative 1: Use the full command with npx
+npx -p cursor-rules cursor-rules-pull
+
+# Alternative 2: Clone the repo and run locally
+git clone https://github.com/Dahkenangnon/cursor-rules.git
+cd cursor-rules
+npm install
+npm run pull
 ```
 
 ## Contributing
